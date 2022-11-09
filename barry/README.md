@@ -13,3 +13,10 @@ Note that running this query:
 SELECT * FROM gaiadr3.gaia_source_lite WHERE ra >= 246.66666666 and ra <= 246.833333333 AND dec >= -24.66666666666 AND dec <= -24.5
 
 yields only 5 stars of magnitudes 19 and 20, a potential candidate for darkest region, even though it's in Scorpio and surrounded by significantly brighter regions
+
+The adjusted-brightness.txt file is created by the following Perl script, which computes brightness divided by area and sorts the results. It also reverts the field values to actual ra and dec, not ra*6 and dec*6. Because some areas of the sky are very small, they have a large but meaningless brightness/area
+
+zcat 1667986137685O-result.csv.gz | perl -F, -anle 'use POSIX; $area = cos(($F[1]+0.5)/6*atan(1)/45); $F[0] /= 6; $F[1] /=6; print "$F[0],$F[1],$F[2],", $F[2]/$area' | sort -t, -k4nr >! adjusted-brightness.txt
+
+gzip adjusted-brightness.txt
+
