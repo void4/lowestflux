@@ -6,6 +6,8 @@ I've created this separate subdirectory so void4 can decide how to handle these 
 
 1667988501590O: Ran query "SELECT FLOOR(ra*6) AS ra, FLOOR(dec*6) AS dec, COUNT(*) FROM gaiadr3.gaia_source_lite GROUP BY 1, 2" to count the number of stars in each 1/6th degree region of the sky as a sanity check to finding the darkest regions.
 
+An attempt to run a query with 1/10th degree "squares" returned 3,000,000 rows but the results appear to have hit a row limit and thus are unlikely to be accurate and are thus not included here.
+
 Note that running this query:
 
 SELECT * FROM gaiadr3.gaia_source_lite WHERE ra >= 246.66666666 and ra <= 246.833333333 AND dec >= -24.66666666666 AND dec <= -24.5
